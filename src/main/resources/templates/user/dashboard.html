@@ -1,0 +1,209 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+</head>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2&display=swap" rel="stylesheet">
+<style>
+    body{
+       font-family: 'Baloo 2', cursive;
+        width: 100%;
+        height: 100%;
+     background: url("https://images.pexels.com/photos/9668535/pexels-photo-9668535.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+     color: white;
+     margin: 0px;
+     padding: 0px;
+     display: flex;
+     flex-direction: row;
+    }
+    .left{
+        display: inline-block;
+        /*border: 2px solid red;*/
+        position: absolute;
+        left:60px;
+        top: 20px;
+    }
+    .left img{
+        width: 136px;
+      
+    }
+    .left div{
+        line-height: 19px;
+        font-size: 26px;
+        text-align: center;
+    }
+
+    .mid{
+        position: absolute;
+        right: 34px;
+        top: 43px;
+        display: inline-block;
+        font-size: 20px;
+    }
+    .navbar{
+        display: inline-block;
+            
+    }
+    .navbar li{
+        display: inline-block;
+    }
+    .navbar li a{
+        color: white;
+        text-decoration: none;
+        padding: 8px 16px;
+    }
+    .navbar li a:hover, .navbar li a:active{
+         text-decoration: underline;
+         color:grey;
+    }
+
+    .container1{
+		 
+        flex: 1; /* Make both containers take up equal space */
+        padding: 10px;
+        margin-top: 150px;
+                display: flex;
+        justify-content: center;
+        align-items: center;
+	}
+	
+	
+    .user-details {
+        text-align: center;
+        width: 70%;
+    }
+
+
+    .user-details table {
+        border: 1px solid white;
+        text-align: center;
+        color: white;
+        width: 100%;
+    }
+	
+    .container2 {
+        
+        flex: 1; /* Make both containers take up equal space */
+        padding: 10px;
+        margin-top: 150px;
+        
+                display: flex;
+        flex-direction: column;
+        align-items: center; /* Center items horizontally */
+        justify-content: center;
+    }
+    
+        form {
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+    }
+
+    form input[type="radio"] {
+        margin: 10px;
+    }
+
+    form input[type="submit"] {
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    form input[type="submit"]:hover {
+        background-color: #45a049;
+    }
+
+</style>
+<body>
+	
+    <header class="header">
+        <div class="left">
+            <img src="https://thumbs.dreamstime.com/b/check-mark-vote-logo-vector-logo-check-mark-vote-symbol-188941428.jpg" alt="">
+        </div>
+        <div class="mid">
+            <ul class="navbar">
+                <li><a href="/user/" class="active">Home</a></li>
+                <li><a href="/logout">Logout</a></li>
+            </ul>
+        </div>
+    </header>
+    
+    
+    <div class="container1">
+		<div class="user-details">
+                        
+                        <h2>User Details:</h2>
+						
+						<table border = '1' align='center'>
+							
+							<tr>
+								<th>Id: </th>
+							<th> <h4 th:text="${user.id}"></h4></th>
+							</tr>
+							
+							<tr>
+								<th>Name: </th>
+								<th> <h4 th:text="${user.name}"></h4></th>
+							</tr>
+							
+							
+						
+								<tr>
+									<th>Email Id: </th>
+									<th><h4 th:text="${user.email}"></h4> </th>
+								</tr>
+					
+								<tr>
+									<th>Phone No.: </th>
+									<th><h4 th:text="${user.phone}"></h4> </th>
+								</tr>
+								
+								<tr>
+									<th>Status.: </th>
+									<th><h4 th:text="${status}"></h4> </th>
+								</tr>				
+				
+						</table>
+					</div>
+    </div>
+    
+    <div class="container2">
+
+<form th:action = "@{/addcandidate}" method ="post">
+
+<div th:if=${session.msg}>
+			<h3 th:text="${session.msg}" style="color:greenyellow"></h3>
+   		
+				<th:block th:text="${#session.removeAttribute('msg')}"></th:block>
+	
+   		</div>
+   		
+		
+
+	<h2>Vote For The Follwing Candidates</h2>
+	
+	<input th:value="${user.email}" name = "email" type="hidden" >
+ <br>
+ <input type="radio" name="candidate"  value ="candidate1" required>Candidate 1  <br><br>
+  <input type="radio" name="candidate"  value = "candidate2" required>Candidate 2 <br><br>
+  <input type="radio" name="candidate"  value = "candidate3" required>Candidate 3 <br><br>
+  <input type="radio" name="candidate"  value = "candidate4" required>Candidate 4 <br><br>
+    
+    <br>
+ 
+<input type = "submit" value="Vote">
+
+</form>
+		
+	</div>
+</body>
+</html>
